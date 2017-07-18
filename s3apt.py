@@ -192,7 +192,7 @@ def rebuild_package_index(prefix):
         print(obj.key)
 
         pkginfo = get_cached_control_data(obj)
-        pkginfo = pkginfo + "\n%s\n" % ("Filename: %s" % obj.key)
+        pkginfo = pkginfo + "\n%s\n" % ("Filename: %s" % urllib.quote(obj.key))
         pkginfos.append(pkginfo)
 
     package_index_obj = s3.Object(bucket_name=config.APT_REPO_BUCKET_NAME, key=prefix + "/Packages")
