@@ -190,10 +190,10 @@ def rebuild_package_index(prefix):
     print("BUILDING PACKAGE INFO")
     pkginfos = []
     for obj in deb_objs:
-        print(obj.key)
+        print("COLLECTING PACKAGE INFO FOR OBJECT KEY: " + obj.key)
 
         pkginfo = get_cached_control_data(obj)
-        pkginfo = pkginfo + "\n%s\n" % ("Filename: %s" % urllib.parse.quote(obj.key))
+        pkginfo = pkginfo.decode('UTF-8') + "\n%s\n" % ("Filename: %s" % obj.key)
         pkginfos.append(pkginfo)
 
     package_index_obj = s3.Object(bucket_name=config.APT_REPO_BUCKET_NAME, key=prefix + "/Packages")
