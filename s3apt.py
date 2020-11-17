@@ -46,7 +46,7 @@ def get_control_data(debfile):
     # control file can be named different things
     control_file_name = [x for x in tar_file.getmembers() if x.name in ['control', './control']][0]
 
-    control_data = tar_file.extractfile(control_file_name).read().strip()
+    control_data = tar_file.extractfile(control_file_name).read().decode('UTF-8')
     # Strip out control fields with blank values.  This tries to allow folded
     # and multiline fields to pass through.  See the debian policy manual for
     # more info on folded and multiline fields.
