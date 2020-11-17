@@ -182,11 +182,12 @@ def rebuild_package_index(prefix):
     # See if we need to rebuild the package index
     metadata_pkghash = get_package_index_hash(filter_prefix)
     calcd_pkghash = calc_package_index_hash(deb_names)
-    print("calcd_pkghash=%s, metadata_pkghash=%s" % (calcd_pkghash, metadata_pkghash))
+    print("PACKAGE INDEX HASHES: calcd_pkghash=%s, metadata_pkghash=%s" % (calcd_pkghash, metadata_pkghash))
     if metadata_pkghash == calcd_pkghash:
         print("PACKAGE INDEX ALREADY UP TO DATE")
         return
 
+    print("BUILDING PACKAGE INFO")
     pkginfos = []
     for obj in deb_objs:
         print(obj.key)
