@@ -50,7 +50,9 @@ Start uploading files to S3, and the lambda should keep everything in sync.
 AWS IAM Policy (Lambda<>S3 Permissions)
 ---------------------
 
-The s3apt Pyton script, which is executed by the Lambda function, requires permissions on the S3 bucket:
+The s3apt Pyton script, which is executed by the Lambda function, requires some permissions on the S3 bucket. Otherwise the script will fail.
+
+Here is an example IAM policy with the minimum required actions/permissions:
 
 ```
 {
@@ -59,13 +61,16 @@ The s3apt Pyton script, which is executed by the Lambda function, requires permi
         {
             "Sid": "",
             "Effect": "Allow",
-            "Action": "s3:*",
+            "Action": "s3:ListBucket",
             "Resource": "arn:aws:s3:::your-unique-bucket-name"
         },
         {
             "Sid": "",
             "Effect": "Allow",
-            "Action": "s3:*",
+            "Action": [
+                "s3:Put*",
+                "s3:Get*"
+            ],
             "Resource": "arn:aws:s3:::your-unique-bucket-name/*"
         }
     ]
